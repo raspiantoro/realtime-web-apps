@@ -32,7 +32,7 @@ func (s *Server) RunServer(ctx context.Context, service appcontext.Service, host
 		select {
 		case <-ctx.Done():
 			server.GracefulStop()
-			log.Println("gRPC server has shutdown")
+			log.Println("gRPC server has been shutdown")
 		}
 	}()
 

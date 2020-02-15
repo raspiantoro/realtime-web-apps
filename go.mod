@@ -2,7 +2,4 @@ module github.com/raspiantoro/realtime-web-apps
 
 go 1.13
 
-require (
-	github.com/spf13/cobra v0.0.5 // indirect
-	github.com/spf13/viper v1.6.2 // indirect
-)
+require github.com/raspiantoro/realtime-web-apps/server v0.0.0-20200215141940-f30ee1a870e6 // indirect
