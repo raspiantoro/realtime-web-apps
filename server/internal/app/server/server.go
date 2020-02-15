@@ -19,8 +19,8 @@ func NewServer() Server {
 }
 
 //RunServer run server for grpc service
-func (s *Server) RunServer(ctx context.Context, service appcontext.Service, port string) (err error) {
-	listen, err := net.Listen("tcp", "localhost:"+port)
+func (s *Server) RunServer(ctx context.Context, service appcontext.Service, host string, port string) (err error) {
+	listen, err := net.Listen("tcp", host+":"+port)
 	if err != nil {
 		return err
 	}
@@ -36,6 +36,6 @@ func (s *Server) RunServer(ctx context.Context, service appcontext.Service, port
 		}
 	}()
 
-	log.Printf("gRPC serve at 0.0.0.0:%s", port)
+	log.Printf("gRPC serve at %s:%s", host, port)
 	return server.Serve(listen)
 }

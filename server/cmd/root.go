@@ -95,6 +95,7 @@ func initConfig() {
 
 func run() {
 	port := "7070"
+	host := "localhost"
 	ctx := context.Background()
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
@@ -110,10 +111,14 @@ func run() {
 		}
 	}()
 
+	consumer := appcontext.InitConsumer()
+
+	consumer.Traffic.Start(ctx)
+
 	svc := appcontext.InitService()
 	srv := server.NewServer()
 
-	err := srv.RunServer(ctx, svc, port)
+	err := srv.RunServer(ctx, svc, host, port)
 	if err != nil {
 		log.Fatalf("failed to start gRPC server: %s", err)
 	}
