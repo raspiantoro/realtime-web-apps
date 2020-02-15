@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package traffic;
+
+message TrafficCountRequest{}
+
+message TrafficCountResponse{
+	uint64 trafficCount = 1;
+}
+
+service Traffic{
+	rpc GetTrafficCount(TrafficCountRequest) returns (stream TrafficCountResponse);
+}
