@@ -1,6 +1,7 @@
 package service
 
 import (
+	"context"
 	"log"
 	"time"
 
@@ -9,7 +10,9 @@ import (
 )
 
 //TrafficService define struct for traffic service
-type TrafficService struct{}
+type TrafficService struct {
+	Context context.Context
+}
 
 //NewTrafficService create new trafficService that implement trafficPB.TrafficServer
 func NewTrafficService() trafficPB.TrafficServer {
@@ -24,8 +27,12 @@ func (s *TrafficService) GetTrafficCount(trafficCount *trafficPB.TrafficCountReq
 
 	for {
 		select {
+		case <-s.Context.Done():
+			delete(trafficstream.GetChan(), key)
+			close(ch)
+			return nil
 		case <-stream.Context().Done():
-			log.Printf("Process has been canceled")
+			log.Printf("request %d has been canceled", key)
 			delete(trafficstream.GetChan(), key)
 			close(ch)
 			return nil
@@ -34,7 +41,6 @@ func (s *TrafficService) GetTrafficCount(trafficCount *trafficPB.TrafficCountReq
 				TrafficCount: uint64(val.TrafficCount),
 			}
 
-			log.Print("receive message from consumer")
 			stream.Send(resp)
 		}
 	}

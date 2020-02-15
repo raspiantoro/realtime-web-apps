@@ -115,7 +115,7 @@ func run() {
 
 	consumer.Traffic.Start(ctx)
 
-	svc := appcontext.InitService()
+	svc := appcontext.InitService(ctx)
 	srv := server.NewServer()
 
 	err := srv.RunServer(ctx, svc, host, port)

@@ -1,6 +1,8 @@
 package appcontext
 
 import (
+	"context"
+
 	"github.com/raspiantoro/realtime-web-apps/server/internal/app/consumer"
 	"github.com/raspiantoro/realtime-web-apps/server/internal/app/service"
 )
@@ -16,9 +18,9 @@ type Consumer struct {
 }
 
 //InitService instantiate all application servic
-func InitService() Service {
+func InitService(ctx context.Context) Service {
 	svc := Service{
-		Traffic: service.TrafficService{},
+		Traffic: service.TrafficService{Context: ctx},
 	}
 
 	return svc
