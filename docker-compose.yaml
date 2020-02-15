@@ -1,0 +1,31 @@
+version: "3"
+services:
+  envoy:
+    container_name: envoy
+    image: envoyproxy/envoy:latest
+    command: /usr/local/bin/envoy -c /etc/envoy/envoy.yaml
+    ports:
+      - "9901:9901"
+      - "8010:8010"
+    volumes:
+      - ./envoy.yaml:/etc/envoy/envoy.yaml
+    networks:
+      mynet:
+        aliases:
+          - envoy
+  traffic-count:
+    container_name: traffic-count
+    build:
+      context: .
+      dockerfile: server/deployments/Dockerfile
+    image: traffic-count:latest
+    restart: on-failure
+    ports:
+      - "7070:7070"
+    networks:
+      mynet:
+        aliases:
+          - traffic-count
+    
+networks:
+  mynet:

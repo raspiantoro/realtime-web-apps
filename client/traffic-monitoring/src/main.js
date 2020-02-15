@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Route, NavLink, HashRouter } from "react-router-dom";
-import Home from "./scenes/home/home";
-import About from "./scenes/about/about";
+import Home from "./scenes/home";
+import About from "./scenes/about";
  
 class Main extends Component {
   render() {

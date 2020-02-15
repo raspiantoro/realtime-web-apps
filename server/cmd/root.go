@@ -95,7 +95,7 @@ func initConfig() {
 
 func run() {
 	port := "7070"
-	host := "localhost"
+	host := "0.0.0.0"
 	ctx := context.Background()
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()

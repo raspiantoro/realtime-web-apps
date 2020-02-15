@@ -1,10 +1,26 @@
 import React, { Component } from "react";
- 
-class Home extends Component {
+import EventEmitter from "../../../../utils/eventemitter"
+import Traffic from "../../../../services/traffic"
+
+class Graph extends Component {
+  
+  GetTraffic(){
+    const traffic = new Traffic()
+    const emitter = new EventEmitter()
+    traffic.get(emitter)
+    
+    emitter.on('newtrafficcount', function(data) {
+      console.log(data['trafficCount'])
+    })
+  }
+  
+  componentDidMount() {
+    this.GetTraffic()
+  }
+
   render() {
     return (
       <div>
-        <h2>Home</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
  Morbi et est vitae sapien hendrerit mattis sit amet sed purus. 
 Nunc commodo sapien risus, eget commodo libero molestie vel. 
@@ -20,4 +36,4 @@ Curabitur feugiat eros nec odio pretium ullamcorper.</p>
   }
 }
  
-export default Home;
+export default Graph;

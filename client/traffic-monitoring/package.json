@@ -11,6 +11,12 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0"
   },
+  "devDependencies": {
+    "@grpc/proto-loader": "^0.3.0",
+    "google-protobuf": "^3.6.1",
+    "grpc": "^1.15.0",
+    "grpc-web": "^1.0.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
