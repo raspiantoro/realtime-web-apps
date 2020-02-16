@@ -1,8 +1,5 @@
 FROM golang:1.12-alpine3.10 AS build-stage
 
-ARG ENVIRONMENT
-ARG GOPROXY
-
 LABEL maintainer="Mario Raspiantoro<raspiantoro@gmail.com>"
 LABEL REPO="https://github.com/raspiantoro/realtime-web-apps"
 

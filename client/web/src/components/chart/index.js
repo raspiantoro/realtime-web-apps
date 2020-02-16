@@ -15,6 +15,23 @@ class Graph extends Component {
           duration: 0
         },
         maintainAspectRatio:false,
+        legend: {
+            display: false
+        },
+        scales: {
+          yAxes: [{
+              ticks: {
+                  suggestedMin: 100,
+                  suggestedMax: 1000,
+                  display: false
+              }
+          }],
+          xAxes: [{
+              ticks: {
+                  display: false
+              }
+          }]
+        }
       },
       data: {
         labels: [1,2,3,4,5,6,7,8,9,10],
@@ -61,11 +78,6 @@ class Graph extends Component {
 
   updateChart(data, parent){
     const datasetsCopy = parent.state.data.datasets.slice(0);
-    
-    const labelCopy = parent.state.data.labels
-    let maxVal = labelCopy[labelCopy.length - 1]
-    labelCopy.shift()
-    labelCopy.push(maxVal + 1)
 
     const dataCopy = datasetsCopy[0].data.slice(0)
     dataCopy.shift()
@@ -74,7 +86,6 @@ class Graph extends Component {
 
     parent.setState({
         data: Object.assign({}, parent.state.data, {
-            label: labelCopy,
             datasets: datasetsCopy
         })
     });

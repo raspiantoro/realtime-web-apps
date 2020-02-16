@@ -13,6 +13,32 @@ services:
       streamnet:
         aliases:
           - envoy
+  nats-streaming:
+    container_name: nats-streaming
+    image: nats-streaming
+    command: -p 4222 -m 8222 -cid streamapps
+    ports:
+      - "4222:4222"
+      - "4223:4223"
+      - "8223:8223"
+    networks:
+      streamnet:
+        aliases:
+          - nats-streaming 
+  nats-dashboard:
+    container_name: nats-dashboard
+    image: nats-dashboard
+    ports:
+      - "8282:8282"
+      - "8222:8222"
+    environment:
+      - STAN_URL=nats://nats-streaming:4222
+      - STAN_CLUSTER=streamapps
+      - STAN_MONITOR_URL=http://nats-streaming:8222
+    networks:
+      streamnet:
+        aliases:
+          - nats-dashboard
   streamserver:
     container_name: streamserver
     build:
@@ -26,6 +52,19 @@ services:
       streamnet:
         aliases:
           - streamserver
+  streamweb:
+    container_name: streamweb
+    build:
+      context: .
+      dockerfile: client/web/deployments/Dockerfile
+    image: streamweb:latest
+    restart: on-failure
+    ports:
+      - "8080:80"
+    networks:
+      streamnet:
+        aliases:
+          - streamweb
     
 networks:
   streamnet:

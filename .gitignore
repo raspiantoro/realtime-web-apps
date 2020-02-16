@@ -21,6 +21,9 @@ node_modules/
 # bin directory
 bin/
 
+#build directory
+build/
+
 # misc
 **/.DS_Store
 **/.env.local

@@ -18,7 +18,7 @@ type Consumer struct {
 	Stream consumer.StreamConsumer
 }
 
-//InitService instantiate all application servic
+//InitService instantiate all application service
 func InitService(ctx context.Context) Service {
 	svc := Service{
 		Stream: service.NewStreamService(ctx),
