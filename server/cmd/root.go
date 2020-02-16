@@ -113,7 +113,7 @@ func run() {
 
 	consumer := appcontext.InitConsumer()
 
-	consumer.Traffic.Start(ctx)
+	consumer.Stream.Start(ctx)
 
 	svc := appcontext.InitService(ctx)
 	srv := server.NewServer()

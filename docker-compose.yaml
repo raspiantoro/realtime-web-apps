@@ -10,22 +10,22 @@ services:
     volumes:
       - ./envoy.yaml:/etc/envoy/envoy.yaml
     networks:
-      mynet:
+      streamnet:
         aliases:
           - envoy
-  traffic-count:
-    container_name: traffic-count
+  streamserver:
+    container_name: streamserver
     build:
       context: .
       dockerfile: server/deployments/Dockerfile
-    image: traffic-count:latest
+    image: streamserver:latest
     restart: on-failure
     ports:
       - "7070:7070"
     networks:
-      mynet:
+      streamnet:
         aliases:
-          - traffic-count
+          - streamserver
     
 networks:
-  mynet:
+  streamnet:

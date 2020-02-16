@@ -1,5 +1,5 @@
 /**
- * @fileoverview gRPC-Web generated client stub for traffic
+ * @fileoverview gRPC-Web generated client stub for stream
  * @enhanceable
  * @public
  */
@@ -7,12 +7,12 @@
 // GENERATED CODE -- DO NOT EDIT!
 
 
-// @ts-ignore
+// @ts-ignore 
 const grpc = {};
 grpc.web = require('grpc-web');
 
 const proto = {};
-proto.traffic = require('./traffic_pb.js');
+proto.stream = require('./stream_pb.js');
 
 /**
  * @param {string} hostname
@@ -22,7 +22,7 @@ proto.traffic = require('./traffic_pb.js');
  * @struct
  * @final
  */
-proto.traffic.TrafficClient =
+proto.stream.StreamClient =
     function(hostname, credentials, options) {
   if (!options) options = {};
   options['format'] = 'text';
@@ -48,7 +48,7 @@ proto.traffic.TrafficClient =
  * @struct
  * @final
  */
-proto.traffic.TrafficPromiseClient =
+proto.stream.StreamPromiseClient =
     function(hostname, credentials, options) {
   if (!options) options = {};
   options['format'] = 'text';
@@ -69,78 +69,78 @@ proto.traffic.TrafficPromiseClient =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.traffic.TrafficCountRequest,
- *   !proto.traffic.TrafficCountResponse>}
+ *   !proto.stream.StreamRequest,
+ *   !proto.stream.StreamResponse>}
  */
-const methodDescriptor_Traffic_GetTrafficCount = new grpc.web.MethodDescriptor(
-  '/traffic.Traffic/GetTrafficCount',
+const methodDescriptor_Stream_GetDataStream = new grpc.web.MethodDescriptor(
+  '/stream.Stream/GetDataStream',
   grpc.web.MethodType.SERVER_STREAMING,
-  proto.traffic.TrafficCountRequest,
-  proto.traffic.TrafficCountResponse,
+  proto.stream.StreamRequest,
+  proto.stream.StreamResponse,
   /**
-   * @param {!proto.traffic.TrafficCountRequest} request
+   * @param {!proto.stream.StreamRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
     return request.serializeBinary();
   },
-  proto.traffic.TrafficCountResponse.deserializeBinary
+  proto.stream.StreamResponse.deserializeBinary
 );
 
 
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.traffic.TrafficCountRequest,
- *   !proto.traffic.TrafficCountResponse>}
+ *   !proto.stream.StreamRequest,
+ *   !proto.stream.StreamResponse>}
  */
 // eslint-disable-next-line
-const methodInfo_Traffic_GetTrafficCount = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.traffic.TrafficCountResponse,
+const methodInfo_Stream_GetDataStream = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.stream.StreamResponse,
   /**
-   * @param {!proto.traffic.TrafficCountRequest} request
+   * @param {!proto.stream.StreamRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
     return request.serializeBinary();
   },
-  proto.traffic.TrafficCountResponse.deserializeBinary
+  proto.stream.StreamResponse.deserializeBinary
 );
 
 
 /**
- * @param {!proto.traffic.TrafficCountRequest} request The request proto
+ * @param {!proto.stream.StreamRequest} request The request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!grpc.web.ClientReadableStream<!proto.traffic.TrafficCountResponse>}
+ * @return {!grpc.web.ClientReadableStream<!proto.stream.StreamResponse>}
  *     The XHR Node Readable Stream
  */
-proto.traffic.TrafficClient.prototype.getTrafficCount =
+proto.stream.StreamClient.prototype.getDataStream =
     function(request, metadata) {
   return this.client_.serverStreaming(this.hostname_ +
-      '/traffic.Traffic/GetTrafficCount',
+      '/stream.Stream/GetDataStream',
       request,
       metadata || {},
-      methodDescriptor_Traffic_GetTrafficCount);
+      methodDescriptor_Stream_GetDataStream);
 };
 
 
 /**
- * @param {!proto.traffic.TrafficCountRequest} request The request proto
+ * @param {!proto.stream.StreamRequest} request The request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!grpc.web.ClientReadableStream<!proto.traffic.TrafficCountResponse>}
+ * @return {!grpc.web.ClientReadableStream<!proto.stream.StreamResponse>}
  *     The XHR Node Readable Stream
  */
-proto.traffic.TrafficPromiseClient.prototype.getTrafficCount =
+proto.stream.StreamPromiseClient.prototype.getDataStream =
     function(request, metadata) {
   return this.client_.serverStreaming(this.hostname_ +
-      '/traffic.Traffic/GetTrafficCount',
+      '/stream.Stream/GetDataStream',
       request,
       metadata || {},
-      methodDescriptor_Traffic_GetTrafficCount);
+      methodDescriptor_Stream_GetDataStream);
 };
 
 
-module.exports = proto.traffic;
+module.exports = proto.stream;
 

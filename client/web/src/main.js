@@ -8,7 +8,7 @@ class Main extends Component {
     return (
       <HashRouter>
         <div>
-          <h1 className="title">Traffic Monitoring</h1>
+          <h1 className="title">Stream Monitoring</h1>
           <ul className="header">
             <li><NavLink to="/">Home</NavLink></li>
             <li><NavLink to="/about">About</NavLink></li>

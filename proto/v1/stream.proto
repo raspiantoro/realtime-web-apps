@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package stream;
+
+message StreamRequest{}
+
+message StreamResponse{
+	uint64 count = 1;
+}
+
+service Stream{
+	rpc GetDataStream(StreamRequest) returns (stream StreamResponse);
+}

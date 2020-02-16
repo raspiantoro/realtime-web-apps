@@ -1,21 +1,25 @@
-import { TrafficClient } from "../traffic-pb/v1/traffic_grpc_web_pb"
+import { StreamClient } from "../stream-pb/v1/stream_grpc_web_pb"
 
-const GrpcClient = (function(){
-    var instance;
- 
-    function createInstance() {
-        const client = new TrafficClient('http://localhost:8010');
-        return client;
-    }
- 
-    return {
-        getInstance: function () {
-            if (!instance) {
-                instance = createInstance();
-            }
-            return instance;
+class GrpcClient{
+
+    constructor(){
+        if(!GrpcClient.instance){
+            GrpcClient.instance = this.createInstance()
         }
-    };
-})();
+    }
 
-export default GrpcClient
+    createInstance(){
+        const client = new StreamClient('http://localhost:8010')
+        return client
+    }
+
+    getInstance(){
+        return GrpcClient.instance
+    }
+
+}
+
+const instance = new GrpcClient();
+Object.freeze(instance);
+
+export default instance

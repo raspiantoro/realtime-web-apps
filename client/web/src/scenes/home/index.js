@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Graph from "./components/graph"
+import Graph from "../../components/chart"
  
 class Home extends Component {
   render() {

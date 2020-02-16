@@ -5,22 +5,23 @@ import (
 
 	"github.com/raspiantoro/realtime-web-apps/server/internal/app/consumer"
 	"github.com/raspiantoro/realtime-web-apps/server/internal/app/service"
+	streamPB "github.com/raspiantoro/realtime-web-apps/server/pkg/stream/v1"
 )
 
 //Service hold all application service instance
 type Service struct {
-	Traffic service.TrafficService
+	Stream streamPB.StreamServer
 }
 
 //Consumer hold all application consumer instance
 type Consumer struct {
-	Traffic consumer.Traffic
+	Stream consumer.StreamConsumer
 }
 
 //InitService instantiate all application servic
 func InitService(ctx context.Context) Service {
 	svc := Service{
-		Traffic: service.TrafficService{Context: ctx},
+		Stream: service.NewStreamService(ctx),
 	}
 
 	return svc
@@ -29,7 +30,7 @@ func InitService(ctx context.Context) Service {
 //InitConsumer instantiate all application consumer
 func InitConsumer() Consumer {
 	c := Consumer{
-		Traffic: consumer.NewConsumer(),
+		Stream: consumer.NewStreamConsumer(),
 	}
 
 	return c

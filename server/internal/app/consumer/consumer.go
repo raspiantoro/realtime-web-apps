@@ -6,20 +6,20 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/raspiantoro/realtime-web-apps/server/internal/pkg/trafficstream"
+	"github.com/raspiantoro/realtime-web-apps/server/internal/pkg/stream"
 )
 
-//Traffic define struct for traffic consumer
-type Traffic struct{}
+//StreamConsumer define struct for stream consumer
+type StreamConsumer struct{}
 
-//NewConsumer create consumer instance
-func NewConsumer() Traffic {
-	return Traffic{}
+//NewStreamConsumer create stream consumer instance
+func NewStreamConsumer() StreamConsumer {
+	return StreamConsumer{}
 }
 
 //Start starting consumer
-func (c *Traffic) Start(ctx context.Context) {
-	var streamChan map[int64]chan trafficstream.Message
+func (c *StreamConsumer) Start(ctx context.Context) {
+	var streamChan map[int64]chan stream.Message
 
 	go func() {
 		for {
@@ -28,14 +28,14 @@ func (c *Traffic) Start(ctx context.Context) {
 			min := 300
 			max := 1000
 
-			msg := trafficstream.Message{
-				TrafficCount: rand.Intn(max-min) + min,
+			msg := stream.Message{
+				Count: rand.Intn(max-min) + min,
 			}
 
-			streamChan = trafficstream.GetChan()
+			streamChan = stream.GetChan()
 
 			for key, ch := range streamChan {
-				log.Printf("send message to streamchan to chan: %d", key)
+				log.Printf("send message to streamchan: %d", key)
 				ch <- msg
 			}
 

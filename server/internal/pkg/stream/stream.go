@@ -1,4 +1,4 @@
-package trafficstream
+package stream
 
 import "sync"
 

@@ -6,7 +6,7 @@ import (
 	"net"
 
 	"github.com/raspiantoro/realtime-web-apps/server/internal/app/appcontext"
-	trafficPB "github.com/raspiantoro/realtime-web-apps/server/pkg/traffic/v1"
+	streamPB "github.com/raspiantoro/realtime-web-apps/server/pkg/stream/v1"
 	"google.golang.org/grpc"
 )
 
@@ -26,7 +26,7 @@ func (s *Server) RunServer(ctx context.Context, service appcontext.Service, host
 	}
 
 	server := grpc.NewServer()
-	trafficPB.RegisterTrafficServer(server, &service.Traffic)
+	streamPB.RegisterStreamServer(server, service.Stream)
 
 	go func() {
 		select {

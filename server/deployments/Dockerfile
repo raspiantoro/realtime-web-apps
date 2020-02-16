@@ -8,13 +8,13 @@ LABEL REPO="https://github.com/raspiantoro/realtime-web-apps"
 
 RUN apk add git && apk add --update make
 
-WORKDIR /opt/traffic-count
+WORKDIR /opt/streamserver
 
 COPY ./server .
 
 RUN go get -v ./...
 
-RUN go build -o bin/trafficcount
+RUN go build -o bin/streamserver
 
 
 FROM alpine
@@ -28,11 +28,11 @@ RUN apk update \
         ca-certificates \
         && update-ca-certificates 2>/dev/null || true
 
-COPY --from=build-stage /opt/traffic-count/bin/trafficcount /opt/traffic-count/bin/
+COPY --from=build-stage /opt/streamserver/bin/streamserver /opt/streamserver/bin/
 
-WORKDIR /opt/traffic-count/bin
+WORKDIR /opt/streamserver/bin
 
-RUN adduser -D -S trafficcount
-USER trafficcount
+RUN adduser -D -S streamserver
+USER streamserver
 
-CMD ["/opt/traffic-count/bin/trafficcount"]
+CMD ["/opt/streamserver/bin/streamserver"]
