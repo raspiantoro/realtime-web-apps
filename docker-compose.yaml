@@ -2,7 +2,7 @@ version: "3"
 services:
   envoy:
     container_name: envoy
-    image: envoyproxy/envoy:latest
+    image: envoyproxy/envoy:v1.12.1
     command: /usr/local/bin/envoy -c /etc/envoy/envoy.yaml
     ports:
       - "9901:9901"
@@ -27,7 +27,7 @@ services:
           - nats-streaming 
   nats-dashboard:
     container_name: nats-dashboard
-    image: nats-dashboard
+    image: kuali/nats-streaming-console
     ports:
       - "8282:8282"
       - "8222:8222"
