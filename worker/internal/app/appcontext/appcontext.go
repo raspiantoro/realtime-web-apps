@@ -5,7 +5,7 @@ import (
 
 	"github.com/raspiantoro/realtime-web-apps/worker/internal/app/publisher"
 	"github.com/raspiantoro/realtime-web-apps/worker/internal/app/task"
-	"github.com/raspiantoro/realtime-web-apps/worker/internal/pkg/streamer"
+	"github.com/raspiantoro/realtime-web-apps/worker/pkg/streamer"
 )
 
 //Streamer hold all streamer application context

@@ -1,6 +1,6 @@
 package streamer
 
-import "github.com/raspiantoro/realtime-web-apps/worker/internal/pkg/streamer/natsstreaming"
+import "github.com/raspiantoro/realtime-web-apps/worker/pkg/streamer/natsstreaming"
 
 //Streamer define interface for streamer
 type Streamer interface {

@@ -5,7 +5,7 @@ import (
 	"log"
 
 	"github.com/raspiantoro/realtime-web-apps/worker/internal/app/message"
-	"github.com/raspiantoro/realtime-web-apps/worker/internal/pkg/streamer"
+	"github.com/raspiantoro/realtime-web-apps/worker/pkg/streamer"
 )
 
 //Publisher define Publisher interface

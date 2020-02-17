@@ -23,8 +23,8 @@ import (
 	"os/signal"
 
 	"github.com/raspiantoro/realtime-web-apps/worker/internal/app/appcontext"
-	"github.com/raspiantoro/realtime-web-apps/worker/internal/pkg/streamer"
-	"github.com/raspiantoro/realtime-web-apps/worker/internal/pkg/streamer/natsstreaming"
+	"github.com/raspiantoro/realtime-web-apps/worker/pkg/streamer"
+	"github.com/raspiantoro/realtime-web-apps/worker/pkg/streamer/natsstreaming"
 	"github.com/spf13/cobra"
 )
 
