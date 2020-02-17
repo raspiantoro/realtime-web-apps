@@ -24,6 +24,8 @@ import (
 
 	"github.com/raspiantoro/realtime-web-apps/server/internal/app/appcontext"
 	"github.com/raspiantoro/realtime-web-apps/server/internal/app/server"
+	"github.com/raspiantoro/realtime-web-apps/worker/pkg/streamer"
+	"github.com/raspiantoro/realtime-web-apps/worker/pkg/streamer/natsstreaming"
 	"github.com/spf13/cobra"
 
 	homedir "github.com/mitchellh/go-homedir"
@@ -103,15 +105,32 @@ func run() {
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)
 
+	opt := streamer.Option{
+		Streamer: streamer.StanStreamerType,
+		StanOption: natsstreaming.ClientOption{
+			ClientID:  "streamappserver",
+			ClusterID: "streamapps",
+			Host:      "nats-streaming",
+			Port:      4222,
+		},
+	}
+
+	stremerOption := appcontext.StreamerOption{
+		Stan: opt,
+	}
+
+	appStreamer := appcontext.InitStreamer(stremerOption)
+
 	go func() {
 		select {
 		case <-c:
 			log.Println("shutting down application...")
 			cancel()
+			appStreamer.Stan.Close()
 		}
 	}()
 
-	consumer := appcontext.InitConsumer()
+	consumer := appcontext.InitConsumer(appStreamer.Stan)
 
 	consumer.Stream.Start(ctx)
 

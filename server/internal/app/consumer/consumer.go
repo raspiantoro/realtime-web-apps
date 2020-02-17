@@ -2,44 +2,60 @@ package consumer
 
 import (
 	"context"
+	"encoding/json"
 	"log"
-	"math/rand"
-	"time"
 
 	"github.com/raspiantoro/realtime-web-apps/server/internal/pkg/stream"
+	"github.com/raspiantoro/realtime-web-apps/worker/pkg/streamer"
+	"github.com/raspiantoro/realtime-web-apps/worker/pkg/streamer/natsstreaming"
 )
 
 //StreamConsumer define struct for stream consumer
-type StreamConsumer struct{}
+type StreamConsumer struct {
+	streamer streamer.Streamer
+}
 
 //NewStreamConsumer create stream consumer instance
-func NewStreamConsumer() StreamConsumer {
-	return StreamConsumer{}
+func NewStreamConsumer(streamer streamer.Streamer) StreamConsumer {
+	return StreamConsumer{
+		streamer: streamer,
+	}
 }
 
 //Start starting consumer
 func (c *StreamConsumer) Start(ctx context.Context) {
-	var streamChan map[int64]chan stream.Message
+
+	sub, err := c.streamer.Listen("streamdata", "", sendMessage)
+	if err != nil {
+		log.Printf("Error streamer listener: %s", err)
+	}
 
 	go func() {
-		for {
-			time.Sleep(1 * time.Second)
-
-			min := 300
-			max := 1000
-
-			msg := stream.Message{
-				Count: rand.Intn(max-min) + min,
-			}
-
-			streamChan = stream.GetChan()
-
-			for key, ch := range streamChan {
-				log.Printf("send message to streamchan: %d", key)
-				ch <- msg
-			}
-
+		select {
+		case <-ctx.Done():
+			log.Print("unsubscribe streamer topic")
+			sub.Unsubscribe()
 		}
 	}()
 
+}
+
+func sendMessage(data []byte, ack natsstreaming.Ack) (err error) {
+
+	msg := stream.Message{}
+	err = json.Unmarshal(data, &msg)
+	if err != nil {
+		return
+	}
+
+	log.Printf("receive new message from streamer")
+
+	streamChan := stream.GetChan()
+
+	for key, ch := range streamChan {
+		log.Printf("send message to streamchan: %d", key)
+		ch <- msg
+	}
+
+	return
 }
