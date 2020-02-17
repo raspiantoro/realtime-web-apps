@@ -25,9 +25,12 @@ services:
       streamnet:
         aliases:
           - nats-streaming 
-  nats-dashboard:
-    container_name: nats-dashboard
-    image: kuali/nats-streaming-console
+  nats-streaming-console:
+    container_name: nats-streaming-console
+    image: nats-streaming-console
+    build:
+      context: .
+      dockerfile: dockerfile/nats-streaming-console.dockerfile
     ports:
       - "8282:8282"
       - "8222:8222"
@@ -38,7 +41,7 @@ services:
     networks:
       streamnet:
         aliases:
-          - nats-dashboard
+          - nats-streaming-console
   streamserver:
     container_name: streamserver
     build:
