@@ -33,7 +33,7 @@ func (t *StreamTask) Run(ctx context.Context) {
 
 	go func() {
 		for {
-			time.Sleep(2 * time.Second)
+			time.Sleep(1 * time.Second)
 			waitChan <- true
 		}
 	}()

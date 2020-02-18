@@ -51,6 +51,9 @@ services:
     restart: on-failure
     ports:
       - "7070:7070"
+    environment:
+      - NATS_HOST=nats-streaming
+      - NATS_PORT=4222
     networks:
       streamnet:
         aliases:

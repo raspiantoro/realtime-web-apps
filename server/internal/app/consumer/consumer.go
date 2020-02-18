@@ -41,7 +41,7 @@ func (c *StreamConsumer) Start(ctx context.Context) {
 }
 
 func sendMessage(data []byte, ack natsstreaming.Ack) (err error) {
-
+	ack()
 	msg := stream.Message{}
 	err = json.Unmarshal(data, &msg)
 	if err != nil {

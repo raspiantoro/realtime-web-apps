@@ -23,9 +23,7 @@ RUN apk update \
         && apk upgrade \
         && apk add --no-cache \
         ca-certificates \
-        && update-ca-certificates 2>/dev/null || true \
-        && apk add iputils \
-        && apk add busybox-extras
+        && update-ca-certificates 2>/dev/null || true 
 
 COPY --from=build-stage /opt/streamserver/bin/streamserver /opt/streamserver/bin/
 
