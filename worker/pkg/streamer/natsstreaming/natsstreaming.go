@@ -2,6 +2,8 @@ package natsstreaming
 
 import (
 	"fmt"
+	"strconv"
+	"strings"
 	"time"
 
 	stan "github.com/nats-io/stan.go"
@@ -56,17 +58,15 @@ func NewNatsStreamingClient(opt ClientOption) (c *Client, err error) {
 }
 
 func (c *Client) getURL(host string, port uint64) (url string) {
-	if host == "" && port == 0 {
-		url = stan.DefaultNatsURL
-		return
+
+	url = stan.DefaultNatsURL
+
+	if host != "" {
+		url = strings.ReplaceAll(url, "127.0.0.1", host)
 	}
 
-	if host == "" {
-		url = fmt.Sprintf("nats://localhost:%d", port)
-	}
-
-	if port == 0 {
-		url = fmt.Sprintf("nats://%s:4222", host)
+	if port != 0 {
+		url = strings.ReplaceAll(url, "4222", strconv.FormatUint(port, 10))
 	}
 
 	return
