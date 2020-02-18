@@ -49,6 +49,9 @@ func NewNatsStreamingClient(opt ClientOption) (c *Client, err error) {
 		stan.NatsURL(url),
 	)
 
+	if err != nil {
+		err = fmt.Errorf("stan error connect to %s: %s", url, err)
+	}
 	return
 }
 

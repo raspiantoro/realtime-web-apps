@@ -21,6 +21,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"strconv"
 
 	"github.com/raspiantoro/realtime-web-apps/server/internal/app/appcontext"
 	"github.com/raspiantoro/realtime-web-apps/server/internal/app/server"
@@ -105,13 +106,19 @@ func run() {
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)
 
+	natsHost := os.Getenv("NATS_HOST")
+	natsPort, err := strconv.ParseUint(os.Getenv("NATS_PORT"), 10, 64)
+	if err != nil {
+		return
+	}
+
 	opt := streamer.Option{
 		Streamer: streamer.StanStreamerType,
 		StanOption: natsstreaming.ClientOption{
 			ClientID:  "streamappserver",
 			ClusterID: "streamapps",
-			Host:      "nats-streaming",
-			Port:      4222,
+			Host:      natsHost,
+			Port:      natsPort,
 		},
 	}
 
@@ -137,7 +144,7 @@ func run() {
 	svc := appcontext.InitService(ctx)
 	srv := server.NewServer()
 
-	err := srv.RunServer(ctx, svc, host, port)
+	err = srv.RunServer(ctx, svc, host, port)
 	if err != nil {
 		log.Fatalf("failed to start gRPC server: %s", err)
 	}
