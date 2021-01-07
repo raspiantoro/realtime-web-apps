@@ -52,6 +52,8 @@ services:
     ports:
       - "7070:7070"
     environment:
+      - GRPC_PORT=7070
+      - GRPC_HOST=0.0.0.0
       - NATS_HOST=nats-streaming
       - NATS_PORT=4222
     networks:
@@ -62,11 +64,14 @@ services:
     container_name: streamweb
     build:
       context: .
-      dockerfile: client/web/deployments/Dockerfile
+      dockerfile: client/web/deployments/Dockerfile.node
     image: streamweb:latest
     restart: on-failure
     ports:
-      - "8080:80"
+      - "8080:3000"
+    environment:
+      - REACT_APP_GRPC_PORT=8010
+      - REACT_APP_GRPC_HOST=localhost
     networks:
       streamnet:
         aliases:

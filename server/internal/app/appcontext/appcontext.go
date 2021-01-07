@@ -4,10 +4,10 @@ import (
 	"context"
 	"log"
 
+	"github.com/raspiantoro/realtime-web-apps/rest/pkg/streamer"
 	"github.com/raspiantoro/realtime-web-apps/server/internal/app/consumer"
 	"github.com/raspiantoro/realtime-web-apps/server/internal/app/service"
 	streamPB "github.com/raspiantoro/realtime-web-apps/server/pkg/stream/v1"
-	"github.com/raspiantoro/realtime-web-apps/worker/pkg/streamer"
 )
 
 //Service hold all application service instance

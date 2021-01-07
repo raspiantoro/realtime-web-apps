@@ -1,5 +1,5 @@
 /*
-Copyright © 2020 NAME HERE <EMAIL ADDRESS>
+Copyright © 2021 NAME HERE <EMAIL ADDRESS>
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -17,41 +17,46 @@ package cmd
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"os"
 	"os/signal"
 
-	"github.com/raspiantoro/realtime-web-apps/worker/internal/app/appcontext"
-	"github.com/raspiantoro/realtime-web-apps/worker/pkg/streamer"
-	"github.com/raspiantoro/realtime-web-apps/worker/pkg/streamer/natsstreaming"
+	"github.com/raspiantoro/realtime-web-apps/rest/internal/app/appcontext"
+	"github.com/raspiantoro/realtime-web-apps/rest/pkg/streamer"
+	"github.com/raspiantoro/realtime-web-apps/rest/pkg/streamer/natsstreaming"
 	"github.com/spf13/cobra"
 )
 
-var cfgFile string
-
-// rootCmd represents the base command when called without any subcommands
-var rootCmd = &cobra.Command{
+// workerCmd represents the worker command
+var workerCmd = &cobra.Command{
 	Use:   "worker",
-	Short: "realtime-web-apps worker",
-	Long:  `worker apps for realtime-web-apps`,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
+	Short: "A brief description of your command",
+	Long: `A longer description that spans multiple lines and likely contains examples
+and usage of using your command. For example:
+
+Cobra is a CLI library for Go that empowers applications.
+This application is a tool to generate the needed files
+to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		run()
+		runWorker()
 	},
 }
 
-// Execute adds all child commands to the root command and sets flags appropriately.
-// This is called by main.main(). It only needs to happen once to the rootCmd.
-func Execute() {
-	if err := rootCmd.Execute(); err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
+func init() {
+	rootCmd.AddCommand(workerCmd)
+
+	// Here you will define your flags and configuration settings.
+
+	// Cobra supports Persistent Flags which will work for this command
+	// and all subcommands, e.g.:
+	// workerCmd.PersistentFlags().String("foo", "", "A help for foo")
+
+	// Cobra supports local flags which will only run when this command
+	// is called directly, e.g.:
+	// workerCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
-func run() {
+func runWorker() {
 
 	ctx := context.Background()
 	ctx, cancel := context.WithCancel(ctx)

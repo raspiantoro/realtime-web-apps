@@ -5,9 +5,9 @@ import (
 	"encoding/json"
 	"log"
 
+	"github.com/raspiantoro/realtime-web-apps/rest/pkg/streamer"
+	"github.com/raspiantoro/realtime-web-apps/rest/pkg/streamer/natsstreaming"
 	"github.com/raspiantoro/realtime-web-apps/server/internal/pkg/stream"
-	"github.com/raspiantoro/realtime-web-apps/worker/pkg/streamer"
-	"github.com/raspiantoro/realtime-web-apps/worker/pkg/streamer/natsstreaming"
 )
 
 //StreamConsumer define struct for stream consumer

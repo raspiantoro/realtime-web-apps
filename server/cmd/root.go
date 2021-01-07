@@ -23,10 +23,10 @@ import (
 	"os/signal"
 	"strconv"
 
+	"github.com/raspiantoro/realtime-web-apps/rest/pkg/streamer"
+	"github.com/raspiantoro/realtime-web-apps/rest/pkg/streamer/natsstreaming"
 	"github.com/raspiantoro/realtime-web-apps/server/internal/app/appcontext"
 	"github.com/raspiantoro/realtime-web-apps/server/internal/app/server"
-	"github.com/raspiantoro/realtime-web-apps/worker/pkg/streamer"
-	"github.com/raspiantoro/realtime-web-apps/worker/pkg/streamer/natsstreaming"
 	"github.com/spf13/cobra"
 
 	homedir "github.com/mitchellh/go-homedir"
@@ -97,8 +97,8 @@ func initConfig() {
 }
 
 func run() {
-	port := "7070"
-	host := "0.0.0.0"
+	port := os.Getenv("GRPC_PORT")
+	host := os.Getenv("GRPC_HOST")
 	ctx := context.Background()
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()

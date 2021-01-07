@@ -8,7 +8,6 @@ require (
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/nats-io/jwt v0.3.2 // indirect
 	github.com/pelletier/go-toml v1.6.0 // indirect
-	github.com/raspiantoro/realtime-web-apps/worker v0.0.0-20200218121402-0d6fc22f2f7f
 	github.com/spf13/afero v1.2.2 // indirect
 	github.com/spf13/cast v1.3.1 // indirect
 	github.com/spf13/cobra v0.0.5

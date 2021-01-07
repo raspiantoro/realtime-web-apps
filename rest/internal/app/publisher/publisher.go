@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/raspiantoro/realtime-web-apps/worker/internal/app/message"
-	"github.com/raspiantoro/realtime-web-apps/worker/pkg/streamer"
+	"github.com/raspiantoro/realtime-web-apps/rest/internal/app/message"
+	"github.com/raspiantoro/realtime-web-apps/rest/pkg/streamer"
 )
 
 //Publisher define Publisher interface

@@ -3,9 +3,9 @@ package appcontext
 import (
 	"log"
 
-	"github.com/raspiantoro/realtime-web-apps/worker/internal/app/publisher"
-	"github.com/raspiantoro/realtime-web-apps/worker/internal/app/task"
-	"github.com/raspiantoro/realtime-web-apps/worker/pkg/streamer"
+	"github.com/raspiantoro/realtime-web-apps/rest/internal/app/publisher"
+	"github.com/raspiantoro/realtime-web-apps/rest/internal/app/task"
+	"github.com/raspiantoro/realtime-web-apps/rest/pkg/streamer"
 )
 
 //Streamer hold all streamer application context

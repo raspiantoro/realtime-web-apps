@@ -6,8 +6,8 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/raspiantoro/realtime-web-apps/worker/internal/app/message"
-	"github.com/raspiantoro/realtime-web-apps/worker/internal/app/publisher"
+	"github.com/raspiantoro/realtime-web-apps/rest/internal/app/message"
+	"github.com/raspiantoro/realtime-web-apps/rest/internal/app/publisher"
 )
 
 //Task define task interface
