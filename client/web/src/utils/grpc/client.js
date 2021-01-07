@@ -12,9 +12,6 @@ class GrpcClient{
         const host = process.env.REACT_APP_GRPC_HOST
         const port = process.env.REACT_APP_GRPC_PORT
         const url = 'http://' + host + ':' + port
-        console.log("HOST: " + host)
-        console.log("PORT: " + port)
-        console.log("URL: " + url)
         const client = new StreamClient(url)
         return client
     }
