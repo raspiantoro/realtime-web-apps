@@ -87,8 +87,6 @@ github.com/prometheus/tsdb v0.7.1/go.mod h1:qhTCs0VvXwvX/y3TZrWD7rabWM+ijKTux40T
 github.com/raspiantoro/realtime-web-apps v0.0.0-20200216094858-7188691cfe67 h1:oY6KR4gfWk1X5dPQngi27hqy9AUstXDiUaqijlLIb1U=
 github.com/raspiantoro/realtime-web-apps v0.0.0-20200217115755-790ef5a93987 h1:4Rft5DDC7XjMU+hu10fyx/Z0BgWXQiiQRL5e4RBmHwI=
 github.com/raspiantoro/realtime-web-apps v0.1.0 h1:mWwreQ4mMbnftIEcqte3mqtTWO5q3UTzdtWlcojEFbc=
-github.com/raspiantoro/realtime-web-apps/worker v0.0.0-20200218125807-420d27c08193 h1:nm0fiOhRWEFgP0uq4UNAMaL0EaY99oH10Xb7HrE+eZI=
-github.com/raspiantoro/realtime-web-apps/worker v0.0.0-20200218125807-420d27c08193/go.mod h1:9wkRseSlJ/dvmVwD7tBHKs9VLr6kZ90f+sO1filTV6k=
 github.com/rogpeppe/fastuuid v0.0.0-20150106093220-6724a57986af/go.mod h1:XWv6SoW27p1b0cqNHllgS5HIMJraePCO15w5zCzIWYg=
 github.com/russross/blackfriday v1.5.2/go.mod h1:JO/DiYxRf+HjHt06OyowR9PTA263kcR/rfWxYHBV53g=
 github.com/sirupsen/logrus v1.2.0/go.mod h1:LxeOpSwHxABJmUn/MG1IvRgCAasNZTLOkJPxbbu5VWo=

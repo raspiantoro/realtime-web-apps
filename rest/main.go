@@ -15,8 +15,8 @@ limitations under the License.
 */
 package main
 
-import "github.com/raspiantoro/realtime-web-apps/worker/cmd"
+import "github.com/raspiantoro/realtime-web-apps/rest/cmd"
 
 func main() {
-  cmd.Execute()
+	cmd.Execute()
 }
