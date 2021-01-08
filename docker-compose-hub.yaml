@@ -44,10 +44,7 @@ services:
           - nats-streaming-console
   streamserver:
     container_name: streamserver
-    build:
-      context: .
-      dockerfile: server/deployments/Dockerfile
-    image: streamserver:latest
+    image: raspiantoro/realtime-streamserver:latest
     restart: on-failure
     ports:
       - "7070:7070"
@@ -64,10 +61,7 @@ services:
           - streamserver
   streamweb:
     container_name: streamweb
-    build:
-      context: .
-      dockerfile: client/web/deployments/Dockerfile.node
-    image: streamweb:latest
+    image: raspiantoro/realtime-web:latest
     restart: on-failure
     ports:
       - "8080:3000"
@@ -80,10 +74,7 @@ services:
           - streamweb
   restserver:
     container_name: restserver
-    build:
-      context: .
-      dockerfile: rest/deployments/Dockerfile
-    image: restserver:latest
+    image: raspiantoro/realtime-restserver:latest
     restart: on-failure
     ports:
       - "8081:1234"
@@ -100,7 +91,7 @@ services:
           - restserver
   restserver-v0.1.0:
     container_name: restserver-v0.1.0
-    image: restserver:v0.1.0
+    image: raspiantoro/realtime-restserver:v0.1.0
     restart: on-failure
     ports:
       - "8082:1234"

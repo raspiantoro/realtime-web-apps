@@ -17,8 +17,18 @@ package cmd
 
 import (
 	"fmt"
+	"log"
+	"math/rand"
+	"net/http"
 	"os"
+	"strconv"
 
+	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
+	"github.com/raspiantoro/realtime-web-apps/rest/internal/app/appcontext"
+	"github.com/raspiantoro/realtime-web-apps/rest/internal/app/message"
+	"github.com/raspiantoro/realtime-web-apps/rest/pkg/streamer"
+	"github.com/raspiantoro/realtime-web-apps/rest/pkg/streamer/natsstreaming"
 	"github.com/spf13/cobra"
 )
 
@@ -32,7 +42,7 @@ var rootCmd = &cobra.Command{
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("root called")
+		run()
 	},
 }
 
@@ -43,4 +53,59 @@ func Execute() {
 		fmt.Println(err)
 		os.Exit(1)
 	}
+}
+
+func run() {
+	natsHost := os.Getenv("NATS_HOST")
+	natsPort, err := strconv.ParseUint(os.Getenv("NATS_PORT"), 10, 64)
+	if err != nil {
+		return
+	}
+
+	natsClientID := os.Getenv("NATS_CLIENT_ID")
+	natsClusterID := os.Getenv("NATS_CLUSTER_ID")
+
+	opt := streamer.Option{
+		Streamer: streamer.StanStreamerType,
+		StanOption: natsstreaming.ClientOption{
+			ClientID:  natsClientID,
+			ClusterID: natsClusterID,
+			Host:      natsHost,
+			Port:      natsPort,
+		},
+	}
+
+	appStreamer := appcontext.Streamer{
+		Stan: appcontext.InitStanStreamer(opt),
+	}
+
+	pubs := appcontext.InitPublisher(appStreamer.Stan)
+
+	e := echo.New()
+
+	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
+		Format: "method=${method}, uri=${uri}, status=${status}\n",
+	}))
+
+	e.GET("/", func(c echo.Context) error {
+		return c.String(http.StatusOK, "Hello, World!")
+	})
+
+	e.GET("/send", func(c echo.Context) (err error) {
+		min := 300
+		max := 1000
+
+		msg := message.StreamData{
+			Count: rand.Intn(max-min) + min,
+		}
+
+		pubs.StreamPublisher.Publish(msg)
+		log.Print("new message has been published")
+
+		return c.String(http.StatusOK, "Data sent from rest v0.2.0")
+	})
+
+	host := os.Getenv("HOST")
+	port := os.Getenv("PORT")
+	e.Logger.Fatal(e.Start(fmt.Sprintf("%s:%s", host, port)))
 }

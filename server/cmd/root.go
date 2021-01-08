@@ -112,11 +112,14 @@ func run() {
 		return
 	}
 
+	natsClientID := os.Getenv("NATS_CLIENT_ID")
+	natsClusterID := os.Getenv("NATS_CLUSTER_ID")
+
 	opt := streamer.Option{
 		Streamer: streamer.StanStreamerType,
 		StanOption: natsstreaming.ClientOption{
-			ClientID:  "streamappserver",
-			ClusterID: "streamapps",
+			ClientID:  natsClientID,
+			ClusterID: natsClusterID,
 			Host:      natsHost,
 			Port:      natsPort,
 		},
