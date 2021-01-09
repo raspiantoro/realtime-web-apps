@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: restserver-v1
+  namespace: realtime-app
+  labels:
+    app: restserver-v1
+spec:
+  selector:
+    app:  restserver-v1
+  ports:
+  - name:  rest-port
+    port:  80

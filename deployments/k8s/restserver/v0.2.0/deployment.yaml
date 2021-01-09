@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: restserver-v2
+  namespace: realtime-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  restserver-v2
+  template:
+    metadata:
+      labels:
+        app: restserver-v2
+    spec:
+      containers:
+        - name: restserver-v2
+          image: raspiantoro/realtime-restserver:v0.2.0
+          resources:
+              limits:
+                memory: "128Mi"
+                cpu: "500m"
+          ports:
+            - containerPort: 80
+          env:
+            - name: PORT
+              value: "80"
+            - name:  HOST
+              value: "0.0.0.0"
+            - name: NATS_HOST
+              value: "stan.realtime-app"
+            - name: NATS_PORT
+              value: "4222"
+            - name: NATS_CLIENT_ID
+              value: "restserver-v2"
+            - name: NATS_CLUSTER_ID
+              value: "streamapps"

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name:  streamserver
+  namespace: realtime-app
+  labels:
+    app: streamserver
+spec:
+  selector:
+    app:  streamserver
+  ports:
+  - name:  grpc-web
+    port:  8070

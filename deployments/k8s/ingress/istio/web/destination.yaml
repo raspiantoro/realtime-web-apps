@@ -1,0 +1,10 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: web-destination
+  namespace: realtime-app
+spec:
+  host: web.realtime-app.svc.cluster.local
+  trafficPolicy:
+    tls:
+      mode: DISABLE

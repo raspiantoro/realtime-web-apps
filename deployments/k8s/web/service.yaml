@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name:  web
+  namespace: realtime-app
+  labels:
+    app: streamserver
+spec:
+  selector:
+    app:  web
+  ports:
+  - name:  app-port
+    port:  8080
+    targetPort: 80

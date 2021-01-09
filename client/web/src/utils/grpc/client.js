@@ -9,9 +9,10 @@ class GrpcClient{
     }
 
     createInstance(){
-        const host = process.env.REACT_APP_GRPC_HOST
-        const port = process.env.REACT_APP_GRPC_PORT
+        const host = "stream.realtime" //process.env.REACT_APP_GRPC_HOST
+        const port = "80" //process.env.REACT_APP_GRPC_PORT
         const url = 'http://' + host + ':' + port
+        console.log("ADDRESS: " + url)
         const client = new StreamClient(url)
         return client
     }

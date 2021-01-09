@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: streamserver
+  namespace: realtime-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: streamserver
+  template:
+    metadata:
+      labels:
+        app: streamserver
+    spec:
+      containers:
+        - name: streamserver
+          image: raspiantoro/realtime-streamserver
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8070
+              name: grpc-web
+          env:
+            - name: GRPC_PORT
+              value: "8070"
+            - name: GRPC_HOST
+              value: "0.0.0.0"
+            - name: NATS_HOST
+              value: "stan.realtime-app"
+            - name: NATS_PORT
+              value: "4222"
+            - name: NATS_CLIENT_ID
+              value: "streamappserver"
+            - name: NATS_CLUSTER_ID
+              value: "streamapps"

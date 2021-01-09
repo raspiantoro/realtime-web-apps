@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name:  stan
+  namespace: realtime-app
+  labels:
+    app: stan
+spec:
+  selector:
+    app:  stan
+  type: LoadBalancer
+  ports:
+  - name: tcp
+    port: 4222
+    protocol: TCP

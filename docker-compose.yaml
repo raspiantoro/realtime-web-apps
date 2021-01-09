@@ -66,7 +66,7 @@ services:
     container_name: streamweb
     build:
       context: .
-      dockerfile: client/web/deployments/Dockerfile.node
+      dockerfile: client/web/deployments/Dockerfile.static
     image: streamweb:latest
     restart: on-failure
     ports:
