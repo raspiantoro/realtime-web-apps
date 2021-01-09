@@ -1,10 +1,21 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
-  name: streamserver-destination
+  name: restserver-v1-destination
   namespace: realtime-app
 spec:
-  host: streamserver.realtime-app.svc.cluster.local
+  host:  restserver-v1.realtime-app.svc.cluster.local
+  trafficPolicy:
+      tls:
+        mode: DISABLE
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: restserver-v2-destination
+  namespace: realtime-app
+spec:
+  host:  restserver-v2.realtime-app.svc.cluster.local
   trafficPolicy:
       tls:
         mode: DISABLE

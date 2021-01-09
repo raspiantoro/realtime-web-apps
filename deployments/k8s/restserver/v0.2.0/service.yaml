@@ -10,4 +10,4 @@ spec:
     app:  restserver-v2
   ports:
   - name:  rest-port
-    port:  80
+    port:  8080
