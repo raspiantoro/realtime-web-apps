@@ -1,0 +1,19 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: restserver-ingress
+  namespace: realtime-app
+spec:
+  entryPoints:
+    - web
+  routes:
+  - kind: Rule
+    match: Host(`rest.realtime`)
+    priority: 10
+    middlewares:
+    - name: cors
+      namespace: realtime-app
+    services:
+    - name: restserver-traefik-service
+      namespace: realtime-app
+      kind: TraefikService
