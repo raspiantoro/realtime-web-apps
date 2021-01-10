@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: restserver-ingress
+  namespace: realtime-app
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: realtime-app-cors@kubernetescrd
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+    - host: rest.realtime
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: restserver-v1
+                port:
+                  number: 8080
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: restserver-v2
+                port:
+                  number: 8080

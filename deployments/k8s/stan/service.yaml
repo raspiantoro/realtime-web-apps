@@ -8,7 +8,6 @@ metadata:
 spec:
   selector:
     app:  stan
-  type: LoadBalancer
   ports:
   - name: tcp
     port: 4222
