@@ -1,0 +1,21 @@
+version: "3"
+services:
+  restserver-v2:
+    image: raspiantoro/realtime-restserver:v0.2.0
+    ports:
+      - "8083:1234"
+    environment:
+      - PORT=1234
+      - HOST=0.0.0.0
+      - NATS_HOST=nats-streaming
+      - NATS_PORT=4222
+      - NATS_CLIENT_ID=streamapprestv2
+      - NATS_CLUSTER_ID=streamapps
+    networks:
+      streamnet:
+        aliases:
+          - restserver-v2
+    
+networks:
+  streamnet:
+    external: true

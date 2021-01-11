@@ -1,0 +1,14 @@
+version: "3"
+services:
+  streamweb:
+    image: raspiantoro/realtime-web:latest
+    ports:
+      - "8080:80"
+    networks:
+      streamnet:
+        aliases:
+          - streamweb
+    
+networks:
+  streamnet:
+    external: true
