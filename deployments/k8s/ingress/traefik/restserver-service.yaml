@@ -9,7 +9,7 @@ spec:
     services:
       - name: restserver-v1
         port: 8080
-        weight: 75%
+        weight: 75
       - name: restserver-v2
         port: 8080
-        weight: 25%
+        weight: 25
