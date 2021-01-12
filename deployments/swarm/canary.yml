@@ -1,0 +1,10 @@
+http:
+  services:
+    canary:
+      weighted:
+        services:
+          # Load balancing between Traefik services
+          - name: restserver-v1@docker
+            weight: 75
+          - name: restserver-v2@docker
+            weight: 25

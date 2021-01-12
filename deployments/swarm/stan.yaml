@@ -3,10 +3,10 @@ services:
   nats-streaming:
     image: nats-streaming
     command: -p 4222 -m 8222 -cid streamapps
-    ports:
-      - "4222:4222"
-      - "4223:4223"
-      - "8223:8223"
+    #ports:
+    #  - "4222:4222"
+    #  - "4223:4223"
+    #  - "8223:8223"
     networks:
       streamnet:
         aliases:

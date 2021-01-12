@@ -3,9 +3,6 @@ services:
   envoy:
     image: envoyproxy/envoy:v1.12.1
     command: /usr/local/bin/envoy -c /etc/envoy/envoy.yaml
-    ports:
-      - "9901:9901"
-      - "8010:8010"
     configs:
       - source: envoy_config
         target: /etc/envoy/envoy.yaml
@@ -13,10 +10,15 @@ services:
       streamnet:
         aliases:
           - envoy
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.streamserver.rule=Host(`stream.realtime`)"
+        - "traefik.http.routers.streamserver.entrypoints=web"
+        - "traefik.http.services.streamserver.loadbalancer.server.port=8010"
+
   streamserver:
     image: raspiantoro/realtime-streamserver:latest
-    ports:
-      - "7070:7070"
     environment:
       - GRPC_PORT=7070
       - GRPC_HOST=0.0.0.0

@@ -1,0 +1,38 @@
+version: "3.7"
+
+services:
+  traefik:
+    image: traefik:v2.0
+    ports:
+      - "80:80"
+      - "8080:8080" # traefik dashboard
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - streamnet
+    configs:
+      - source: canary-config
+        target: /conf.d/canary.yml
+      - source: traefik-config
+        target: /traefik.yml
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.api.rule=Host(`realtime`)"
+        - "traefik.http.routers.api.service=api@internal" # Let the dashboard access the traefik api
+
+networks:
+  streamnet:
+    external: true
+
+configs:
+  canary-config:
+    name: canary-config-${CONFIG:-1}
+    file: ./canary.yml
+  traefik-config:
+    name: traefik-config-${CONFIG:-1}
+    file: ./traefik.yml
